@@ -16,6 +16,7 @@ public abstract class Empleado implements Cloneable{
     public Empleado(String codigo, String nombre, double salarioBase) {
         this.codigo = codigo;
         this.nombre = nombre;
+        setSalarioBase(salarioBase);
     }
     public String getCodigo() {
         return codigo;
@@ -61,4 +62,15 @@ public abstract class Empleado implements Cloneable{
             return "Superior";
         }
     }   
+    public String mostrarInformacion() {
+        return "Código: " + codigo + "Nombre: " + nombre + "Salario Base: " + salarioBase;
+    }
+    @Override
+    public Empleado clone() {
+        try {
+            return (Empleado) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException("Error al clonar el empleado", e);
+        }
+    }
 }

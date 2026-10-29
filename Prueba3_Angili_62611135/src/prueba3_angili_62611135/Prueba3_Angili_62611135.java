@@ -3,12 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package prueba3_angili_62611135;
-
+import javax.swing.SwingUtilities;
 public class Prueba3_Angili_62611135 {
 
    
     public static void main(String[] args) {
-       
+       SwingUtilities.invokeLater(() -> {
+            new VentanaPrincipal().setVisible(true);
+        });
+    
     }
     
 }

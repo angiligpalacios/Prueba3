@@ -8,6 +8,13 @@ package prueba3_angili_62611135;
  *
  * @author ANGILI PALACIOS
  */
-public class Empleado {
+public abstract class Empleado implements Cloneable{
+    private String codigo;
+    private String nombre;
+    private double salarioBase;
     
+    public Empleado(String codigo, String nombre, double salarioBase) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+    }
 }

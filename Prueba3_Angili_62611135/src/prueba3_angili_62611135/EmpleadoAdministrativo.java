@@ -14,6 +14,8 @@ public class EmpleadoAdministrativo extends Empleado {
     
     public EmpleadoAdministrativo(String codigo, String nombre, double salarioBase, double bonificacion, double descuento) {
         super(codigo, nombre, salarioBase);
+        setBonificacion(bonificacion);
+        setDescuento(descuento);
         
     }
     public double getBonificacion() {
@@ -25,6 +27,17 @@ public class EmpleadoAdministrativo extends Empleado {
             this.bonificacion = bonificacion;
         } else {
             this.bonificacion = 0;
+        }
+    }
+    public double getDescuento() {
+        return descuento;
+    }
+
+    public void setDescuento(double descuento) {
+        if (descuento >= 0 && descuento <= 100) {
+            this.descuento = descuento;
+        } else {
+            this.descuento = 0;
         }
     }
 }

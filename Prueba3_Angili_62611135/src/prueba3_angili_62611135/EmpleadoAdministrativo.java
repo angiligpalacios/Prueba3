@@ -39,5 +39,10 @@ public class EmpleadoAdministrativo extends Empleado {
         } else {
             this.descuento = 0;
         }
+    
+    }
+    @Override
+    public double calcularSalario() {
+        return (getSalarioBase() + bonificacion) * (1 - descuento / 100.0);
     }
 }

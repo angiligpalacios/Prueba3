@@ -8,6 +8,12 @@ package prueba3_angili_62611135;
  *
  * @author ANGILI PALACIOS
  */
-public class EmpleadoAdministrativo {
+public class EmpleadoAdministrativo extends Empleado {
+    private double bonificacion;
+    private double descuento;
     
+    public EmpleadoAdministrativo(String codigo, String nombre, double salarioBase, double bonificacion, double descuento) {
+        super(codigo, nombre, salarioBase);
+        
+    }
 }

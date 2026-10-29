@@ -169,5 +169,91 @@ public class VentanaPrincipal extends JFrame {
         txtAdicional2.setText("");
         txtCodigo.requestFocus();
     }
+    private void clonarEmpleado() {
+        int filaSeleccionada = tablaEmpleados.getSelectedRow();
+        if (filaSeleccionada == -1) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un empleado de la tabla para clonar.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        Empleado original = listaEmpleados.get(filaSeleccionada);
+        Empleado clon = original.clone();
+
+        String nuevoCodigo = JOptionPane.showInputDialog(this, "Ingrese un nuevo código único para el clon:", original.getCodigo() + "-CLON");
+        if (nuevoCodigo == null || nuevoCodigo.trim().isEmpty()) return;
+
+        for (Empleado emp : listaEmpleados) {
+            if (emp.getCodigo().equalsIgnoreCase(nuevoCodigo.trim())) {
+                JOptionPane.showMessageDialog(this, "El código ya existe. Intente nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+
+        clon.setCodigo(nuevoCodigo.trim());
+        listaEmpleados.add(clon);
+        actualizarTabla();
+        JOptionPane.showMessageDialog(this, "Empleado clonado y registrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+    }
+    private void compararEmpleados() {
+        if (listaEmpleados.size() < 2) {
+            JOptionPane.showMessageDialog(this, "Debe haber al menos dos empleados registrados para comparar.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        String codigo1 = JOptionPane.showInputDialog(this, "Ingrese el codigo del primer empleado:");
+        String codigo2 = JOptionPane.showInputDialog(this, "Ingrese el codigo del segundo empleado:");
+
+        Empleado e1 = null, e2 = null;
+        for (Empleado emp : listaEmpleados) {
+            if (emp.getCodigo().equalsIgnoreCase(codigo1)) e1 = emp;
+            if (emp.getCodigo().equalsIgnoreCase(codigo2)) e2 = emp;
+        }
+
+        if (e1 == null || e2 == null) {
+            JOptionPane.showMessageDialog(this, "Uno o ambos codigos no fueron encontrados.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        boolean mismaReferencia = (e1 == e2);
+        boolean mismosAtributos = e1.getNombre().equalsIgnoreCase(e2.getNombre()) && 
+                                  e1.getSalarioBase() == e2.getSalarioBase() && 
+                                  e1.calcularSalario() == e2.calcularSalario();
+
+        String resultado = "Comparación de Objetos:\n" +
+                           "- Misma referencia (==): " + mismaReferencia + "\n" +
+                           "- Equivalencia de datos principales: " + mismosAtributos;
+
+        JOptionPane.showMessageDialog(this, resultado, "Resultado de Comparación", JOptionPane.INFORMATION_MESSAGE);
+    }
+    private void mostrarSalarioMaximo() {
+        if (listaEmpleados.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay empleados registrados.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        Empleado maxEmp = listaEmpleados.get(0);
+        for (Empleado emp : listaEmpleados) {
+            if (emp.calcularSalario() > maxEmp.calcularSalario()) {
+                maxEmp = emp;
+            }
+        }
+
+        JOptionPane.showMessageDialog(this, "Empleado con mayor salario:\n" + maxEmp.mostrarInformacion() + 
+                "\nSalario: " + String.format("%.2f", maxEmp.calcularSalario()), "Salario Máximo", JOptionPane.INFORMATION_MESSAGE);
+    }
+    private void mostrarPromedioSalarial() {
+        if (listaEmpleados.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay empleados registrados.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        double suma = 0;
+        for (Empleado emp : listaEmpleados) {
+            suma += emp.calcularSalario();
+        }
+        double promedio = suma / listaEmpleados.size();
+
+        JOptionPane.showMessageDialog(this, "Salario promedio general: " + String.format("%.2f", promedio), "Promedio Salarial", JOptionPane.INFORMATION_MESSAGE);
+    }
     
 }

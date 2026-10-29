@@ -39,5 +39,42 @@ public class VentanaPrincipal extends JFrame {
         panelFormulario.add(new JLabel("Codigo: "));
         txtCodigo = new JTextField();
         panelFormulario.add(txtCodigo);
+        panelFormulario.add(new JLabel("Nombre:"));
+        txtNombre = new JTextField();
+        panelFormulario.add(txtNombre);
+
+        panelFormulario.add(new JLabel("Tipo:"));
+        cmbTipo = new JComboBox<>(new String[]{"Administrativo", "Por horas"});
+        cmbTipo.addActionListener(e -> actualizarEtiquetasCampos());
+        panelFormulario.add(cmbTipo);
+
+        panelFormulario.add(new JLabel("Salario Base:"));
+        txtSalarioBase = new JTextField();
+        panelFormulario.add(txtSalarioBase);
+
+        JLabel lblAdicional1 = new JLabel("Bonificacion:");
+        panelFormulario.add(lblAdicional1);
+        txtAdicional1 = new JTextField();
+        panelFormulario.add(txtAdicional1);
+
+        JLabel lblAdicional2 = new JLabel("Descuento:");
+        panelFormulario.add(lblAdicional2);
+        txtAdicional2 = new JTextField();
+        panelFormulario.add(txtAdicional2);
+
+        
+    }
+    private void actualizarEtiquetasCampos() {
+        JPanel panel = (JPanel) ((JPanel) getContentPane().getComponent(0)).getComponent(0);
+        JLabel lbl1 = (JLabel) panel.getComponent(8);
+        JLabel lbl2 = (JLabel) panel.getComponent(10);
+
+        if (cmbTipo.getSelectedIndex() == 0) {
+            lbl1.setText("Bonificacion :");
+            lbl2.setText("Descuento:");
+        } else {
+            lbl1.setText("Horas Trabajadas:");
+            lbl2.setText("Tarifa por Hora:");
+        }
     }
 }

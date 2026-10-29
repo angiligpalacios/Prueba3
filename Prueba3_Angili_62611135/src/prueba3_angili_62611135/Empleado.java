@@ -17,4 +17,48 @@ public abstract class Empleado implements Cloneable{
         this.codigo = codigo;
         this.nombre = nombre;
     }
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        if (codigo != null && !codigo.trim().isEmpty()) {
+            this.codigo = codigo;
+        }
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        if (nombre != null && !nombre.trim().isEmpty()) {
+            this.nombre = nombre;
+        }
+    }
+
+    public double getSalarioBase() {
+        return salarioBase;
+    }
+
+    public void setSalarioBase(double salarioBase) {
+        if (salarioBase >= 0) {
+            this.salarioBase = salarioBase;
+        } else {
+            this.salarioBase = 0;
+        }
+    }
+
+    public abstract double calcularSalario();
+
+    public String obtenerCategoria() {
+        double salario = calcularSalario();
+        if (salario < 1000) {
+            return "Básico";
+        } else if (salario <= 2000) {
+            return "Estándar";
+        } else {
+            return "Superior";
+        }
+    }   
 }

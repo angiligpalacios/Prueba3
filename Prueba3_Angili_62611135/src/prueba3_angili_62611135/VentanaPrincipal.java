@@ -83,7 +83,20 @@ public class VentanaPrincipal extends JFrame {
         panelNorteCentro.add(panelFormulario, BorderLayout.CENTER);
         panelNorteCentro.add(panelBotones, BorderLayout.SOUTH);
         add(panelNorteCentro, BorderLayout.NORTH);
+        modeloTabla = new DefaultTableModel(new String[]{"Código", "Nombre", "Tipo", "Salario Calculado", "Categoría"}, 0);
+        tablaEmpleados = new JTable(modeloTabla);
+        add(new JScrollPane(tablaEmpleados), BorderLayout.CENTER);
 
+       
+        btnRegistrar.addActionListener(e -> registrarEmpleado());
+        btnBuscar.addActionListener(e -> buscarEmpleado());
+        btnClonar.addActionListener(e -> clonarEmpleado());
+        btnComparar.addActionListener(e -> compararEmpleados());
+        btnMaximo.addActionListener(e -> mostrarSalarioMaximo());
+        btnPromedio.addActionListener(e -> mostrarPromedioSalarial());
+        btnLimpiar.addActionListener(e -> limpiarFormulario());
+
+        actualizarEtiquetasCampos();
         
     }
     private void actualizarEtiquetasCampos() {

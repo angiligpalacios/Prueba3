@@ -14,6 +14,8 @@ public class EmpleadoPorHoras extends Empleado {
     
     public EmpleadoPorHoras(String codigo, String nombre, double salarioBase, int horasTrabajadas, double tarifaPorHora) {
         super(codigo, nombre, salarioBase);
+        setHorasTrabajadas(horasTrabajadas);
+        setTarifaPorHora(tarifaPorHora);
     }
     
     public int getHorasTrabajadas(){
@@ -26,6 +28,17 @@ public class EmpleadoPorHoras extends Empleado {
         }
         else{
             this.horasTrabajadas=0;
+        }    
+    }
+    public double getTarifaPorHora() {
+        return tarifaPorHora;
+    }
+
+    public void setTarifaPorHora(double tarifaPorHora) {
+        if (tarifaPorHora >= 0) {
+            this.tarifaPorHora = tarifaPorHora;
+        } else {
+            this.tarifaPorHora = 0;
         }
     }
 }

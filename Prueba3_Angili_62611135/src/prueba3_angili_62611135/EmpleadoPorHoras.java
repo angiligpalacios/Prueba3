@@ -41,4 +41,7 @@ public class EmpleadoPorHoras extends Empleado {
             this.tarifaPorHora = 0;
         }
     }
+    public double calcularSalario() {
+        return getSalarioBase() + (horasTrabajadas * tarifaPorHora);
+    }
 }

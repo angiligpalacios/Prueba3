@@ -124,5 +124,50 @@ public class VentanaPrincipal extends JFrame {
             JOptionPane.showMessageDialog(this, "No se encontro ningún empleado con ese codigo.", "Aviso", JOptionPane.WARNING_MESSAGE);
         }
     }
+    private void registrarEmpleado() {
+        try {
+            String codigo = txtCodigo.getText().trim();
+            String nombre = txtNombre.getText().trim();
+
+            if (codigo.isEmpty() || nombre.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Los campos de codigo y nombre no pueden estar vacíos.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            for (Empleado emp : listaEmpleados) {
+                if (emp.getCodigo().equalsIgnoreCase(codigo)) {
+                    JOptionPane.showMessageDialog(this, "Ya existe un empleado con el codigo ingresado.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+
+            double salarioBase = Double.parseDouble(txtSalarioBase.getText().trim());
+            double val1 = Double.parseDouble(txtAdicional1.getText().trim());
+            double val2 = Double.parseDouble(txtAdicional2.getText().trim());
+
+            Empleado nuevoEmpleado;
+            if (cmbTipo.getSelectedIndex() == 0) {
+                nuevoEmpleado = new EmpleadoAdministrativo(codigo, nombre, salarioBase, val1, val2);
+            } else {
+                nuevoEmpleado = new EmpleadoPorHoras(codigo, nombre, salarioBase, (int) val1, val2);
+            }
+
+            listaEmpleados.add(nuevoEmpleado);
+            actualizarTabla();
+            limpiarFormulario();
+            JOptionPane.showMessageDialog(this, "Empleado registrado exitosamente.", "Exito", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Por favor verifique que los valores numéricos sean validos.", "Error de formato", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    private void limpiarFormulario() {
+        txtCodigo.setText("");
+        txtNombre.setText("");
+        txtSalarioBase.setText("");
+        txtAdicional1.setText("");
+        txtAdicional2.setText("");
+        txtCodigo.requestFocus();
+    }
     
 }

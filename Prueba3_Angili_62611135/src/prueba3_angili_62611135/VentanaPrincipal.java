@@ -99,4 +99,30 @@ public class VentanaPrincipal extends JFrame {
             lbl2.setText("Tarifa por Hora:");
         }
     }
+    private void actualizarTabla() {
+        modeloTabla.setRowCount(0);
+        for (Empleado emp : listaEmpleados) {
+            String tipoStr = (emp instanceof EmpleadoAdministrativo) ? "Administrativo" : "Por horas";
+            modeloTabla.addRow(new Object[]{
+                emp.getCodigo(),
+                emp.getNombre(),
+                tipoStr,
+                String.format("%.2f", emp.calcularSalario()),
+                emp.obtenerCategoria()
+            });
+        }
+    }
+    private void buscarEmpleado() {
+        String codigo = JOptionPane.showInputDialog(this, "Ingrese el codigo del empleado a buscar:");
+        if (codigo != null && !codigo.trim().isEmpty()) {
+            for (Empleado emp : listaEmpleados) {
+                if (emp.getCodigo().equalsIgnoreCase(codigo.trim())) {
+                    JOptionPane.showMessageDialog(this, emp.mostrarInformacion() + "\nSalario Calculado: " + emp.calcularSalario(), "Empleado Encontrado", JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
+            }
+            JOptionPane.showMessageDialog(this, "No se encontro ningún empleado con ese codigo.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+    
 }

@@ -16,4 +16,15 @@ public class EmpleadoAdministrativo extends Empleado {
         super(codigo, nombre, salarioBase);
         
     }
+    public double getBonificacion() {
+        return bonificacion;
+    }
+
+    public void setBonificacion(double bonificacion) {
+        if (bonificacion >= 0) {
+            this.bonificacion = bonificacion;
+        } else {
+            this.bonificacion = 0;
+        }
+    }
 }

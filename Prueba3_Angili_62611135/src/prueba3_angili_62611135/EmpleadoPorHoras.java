@@ -16,5 +16,16 @@ public class EmpleadoPorHoras extends Empleado {
         super(codigo, nombre, salarioBase);
     }
     
+    public int getHorasTrabajadas(){
+        return horasTrabajadas;
+    }
     
+    public void setHorasTrabajadas(int horasTrabajadas){
+        if(horasTrabajadas>=0){
+            this.horasTrabajadas = horasTrabajadas; 
+        }
+        else{
+            this.horasTrabajadas=0;
+        }
+    }
 }

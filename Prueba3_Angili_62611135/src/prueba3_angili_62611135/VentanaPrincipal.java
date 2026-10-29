@@ -61,6 +61,28 @@ public class VentanaPrincipal extends JFrame {
         panelFormulario.add(lblAdicional2);
         txtAdicional2 = new JTextField();
         panelFormulario.add(txtAdicional2);
+        JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        
+        JButton btnRegistrar = new JButton("Registrar");
+        JButton btnBuscar = new JButton("Buscar");
+        JButton btnClonar = new JButton("Clonar empleado");
+        JButton btnComparar = new JButton("Comparar");
+        JButton btnMaximo = new JButton("Salario Maximo");
+        JButton btnPromedio = new JButton("Promedio");
+        JButton btnLimpiar = new JButton("Limpiar");
+
+        panelBotones.add(btnRegistrar);
+        panelBotones.add(btnBuscar);
+        panelBotones.add(btnClonar);
+        panelBotones.add(btnComparar);
+        panelBotones.add(btnMaximo);
+        panelBotones.add(btnPromedio);
+        panelBotones.add(btnLimpiar);
+
+        JPanel panelNorteCentro = new JPanel(new BorderLayout());
+        panelNorteCentro.add(panelFormulario, BorderLayout.CENTER);
+        panelNorteCentro.add(panelBotones, BorderLayout.SOUTH);
+        add(panelNorteCentro, BorderLayout.NORTH);
 
         
     }
